@@ -46,13 +46,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(mongoSanitize())
-
+///////////////////////////////////////////////////////////////////////////////////
 
 const MongoDBStore = require("connect-mongo");
 
 
 const sessionConfig = {
-    store: MongoDBStore.create({ mongoUrl: dbUrl }),
     name: 'cook',
     secret: 'thisshouldbeabettersecret!',
     resave: false,
@@ -64,6 +63,8 @@ const sessionConfig = {
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 app.use(session(sessionConfig))
 app.use(flash());
