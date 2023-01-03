@@ -27,7 +27,7 @@ const { storage } = require('../cloudinary/index.js');
 const upload = multer({ storage });
 
 /////////////////////////////////////////////////////////////////
-router.get('/campground', (req, res) => {
+router.get('/campground', async function (req, res) {
     const campgrounds = await Campground.find({});
     res.render('index', {campgrounds});
     
