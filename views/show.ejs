@@ -1,0 +1,114 @@
+<% layout ('layouts/boilerplate.ejs') %>
+    <link rel="stylesheet" href="/styleSheets/stars.css">
+    <h1>
+        <%if (currentUser) {%>
+            <%=currentUser.username%>
+                <% } %>
+    </h1>
+
+    <div class="row" style="margin-top: 15px; margin-bottom:15px;">
+        <div class="col-7">
+
+            <div class="card" style="width: auto;">
+                <% for (let img of campgrounds.image) {%>
+                    <img src="<%=img.url%>" class="card-img-top" alt="...">
+                    <% } %>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%=campgrounds.title%>
+                            </h5>
+                            <p class="card-text">
+                                <%=campgrounds.location%>
+                            </p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Submitted by:
+                                <%=campgrounds.author.username%>
+                            </li>
+                            <li class="list-group-item">
+                                <%=campgrounds.description%>
+                            </li>
+                            <li class="list-group-item"><b>Price:</b>
+                                <%=campgrounds.price%>
+                            </li>
+
+                        </ul>
+                        <% if (currentUser && campgrounds.author.equals(currentUser._id)) { %>
+                            <div class="d-flex">
+                                <button type="button" class="btn p-2 flex-fill btn-primary"> <a
+                                        href="http://localhost:3000/campground/<%=campgrounds._id%>/edit"
+                                        style="text-decoration:none; color:WHITE;">click
+                                        kro</a></button>
+                                <button type="submit" form="NISH" class="btn p-2 flex-fill btn-danger">DELETE</button>
+
+                            </div>
+                            <% } %>
+
+            </div>
+
+
+        </div>
+        <div class="col-5 d-flex flex-column">
+            <h2 style="text-align: center;">Reviews</h2>
+            <% for (let r of campgrounds.reviews) { %>
+                <div class="card-body">
+                    <h4 class="card-title">Rating: <%=r.rating%>
+                    </h4>
+                    <p class="starability-result" data-rating="<%=r.rating%>">
+                        Rated: 3 stars
+                    </p>
+                    <h5 class="card-title">By: <%=r.author.username%>
+                    </h5>
+                    <p style="height:auto" class="card-text">Description:<%=r.body%>
+                    </p>
+                    <% if (currentUser && r.author.equals(currentUser._id)) { %>
+                        <form action="/campground/<%=campgrounds._id%>/reviews/<%=r._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger text-white">DELETE</button>
+                        </form>
+                        <% } %>
+                </div>
+                <% } %>
+
+        </div>
+
+
+    </div>
+
+    <form method="post" action="/campground/<%=campgrounds._id%>/reviews">
+        <div class="row">
+            <div class="col-6 d-flex flex-column justify-content-between">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Add a Review</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput"
+                        placeholder="Tell us about your experience" name="review[body]">
+                </div>
+                <fieldset class="starability-basic">
+                    <legend>First rating:</legend>
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
+                        aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
+
+                <br><br>
+                <button type="submit" class="btn btn-outline-primary">Submit</button>
+
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+    <form hidden ID="NISH" method="post" action="http://localhost:3000/campground/<%=campgrounds._id%>?_method=DELETE">
+        <button type="submit">DELETE</button>
+    </form>

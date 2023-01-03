@@ -1,0 +1,41 @@
+<nav class="navbar sticky-top navbar-expand-lg " style="background-color: #e3f2fd">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Yelp Camp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="http://localhost:3000/campground">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:3000/campground/new">New</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:3000/user/register">Register</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:3000/user/login">Login</a>
+                </li>
+
+                <li>
+                    <% if (currentUser) {%>
+                        <form action="http://localhost:3000/user/logout" method="get" class="nav-item"><button
+                                class="btn btn-primary" style="margin-left:600px;">Logout</button></form>
+                        <% } %>
+                </li>
+
+            </ul>
+
+
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>

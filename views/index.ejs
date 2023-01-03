@@ -1,0 +1,33 @@
+<% layout ('layouts/boilerplate.ejs') %>
+    <h1>List of active campgrounds</h1>
+
+    <% for (let campground of campgrounds) { %>
+        <div class="card mb-3" style="max-width: auto;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <% campground.image.forEach(function(img, i) { %>
+                        <% if (i==0 ) { %>
+                            <img src="<%=img.url%>" class="img-fluid rounded-start img-thumbnail" alt="...">
+                            <% } %>
+                                <% }) %>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%=campground.title%>
+                        </h5>
+                        <h6 class="card-title">
+                            <%=campground.location%>
+                        </h6>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <a href="http://localhost:3000/campground/<%=campground._id%>" class="btn btn-primary"
+                            style="margin-top:5px">View
+                            <%=campground.title%>
+                        </a>
+                        <p class="card-text "><small class="text-muted mb-auto">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
