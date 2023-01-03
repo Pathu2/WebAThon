@@ -127,6 +127,8 @@ app.use((err, req, res, next) => {
 })
 
 
-app.listen(PORT, function (req, res) {
-    console.log("server is running on your HP PAB");
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log("listening for requests");
+    })
 })
