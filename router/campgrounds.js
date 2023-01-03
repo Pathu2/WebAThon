@@ -27,11 +27,14 @@ const { storage } = require('../cloudinary/index.js');
 const upload = multer({ storage });
 
 /////////////////////////////////////////////////////////////////
+router.get('/campground', (req, res) => {
+    res.render(campgrounds.index);
+    
+})
 
 ////////////////////////////////////////////////////////////////////
 
 router.route('https://yelp-x6hr.onrender.com/campground')
-    .get(campgrounds.index)
     .post(isLoggedIn, upload.array('image'), validateCampground, catchAsync(campgrounds.creat))
 
 
