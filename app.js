@@ -85,8 +85,9 @@ app.use((req, res, next) => {
 
 /////////////////////////////////////////////////////////////////////////
 
-app.get('/campground', (req, res) => {
-    res.send("hello")
+app.get('/campground', async (req, res) => {
+    const campgrounds = await Campground.find({});
+    res.render('index', { campgrounds });
 })
 
 ///////////////////////////////////////////////////////////////////////////////////
