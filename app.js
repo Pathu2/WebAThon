@@ -126,9 +126,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err });
 })
 
-
-connectDB().then(() => {
-    app.listen(PORT, () => {
+app.listen(PORT, () => {
         console.log("listening for requests");
-    })
 })
+
