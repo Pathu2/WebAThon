@@ -30,7 +30,7 @@ const upload = multer({ storage });
 
 ////////////////////////////////////////////////////////////////////
 
-router.route('/campground')
+router.route('https://yelp-x6hr.onrender.com/campground')
     .get(campgrounds.index)
     .post(isLoggedIn, upload.array('image'), validateCampground, catchAsync(campgrounds.creat))
 
