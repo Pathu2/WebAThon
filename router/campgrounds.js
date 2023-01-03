@@ -28,7 +28,7 @@ const upload = multer({ storage });
 
 /////////////////////////////////////////////////////////////////
 router.get('/campground', (req, res) => {
-    res.render(campgrounds.index);
+    res.render(index);
     
 })
 
