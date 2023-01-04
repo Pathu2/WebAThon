@@ -31,7 +31,7 @@ module.exports.edits = async function (req, res) {
 
 module.exports.a3 = async function (req, res) {
     const { id } = req.params;
-    const camp = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
+    const camp = await Campground.findByIdAndUpdate(id, { ...req.body });
     camp.image = req.files.map(f => ({ url: f.path, filename: f.filename }))
     await camp.save()
     if (req.body.deleteImages) {
