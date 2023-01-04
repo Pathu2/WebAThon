@@ -84,7 +84,7 @@ app.use((req, res, next) => {
 })
 
 /////////////////////////////////////////////////////////////////////////
-
+const Campground = require('./models/campground.js')
 app.get('/campground', async (req, res) => {
     const campgrounds = await Campground.find({});
     res.render('index', { campgrounds });
