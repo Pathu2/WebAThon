@@ -52,6 +52,10 @@ const MongoDBStore = require("connect-mongo");
 
 
 const sessionConfig = {
+    store: MongoDBStore.create({
+        mongoUrl: dbUrl,
+        touchAfter: 24 * 60
+    }),
     name: 'cook',
     secret: 'thisshouldbeabettersecret!',
     resave: false,
