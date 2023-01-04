@@ -34,7 +34,7 @@ router.get('/campground', async function(req, res, next) {
 
 ////////////////////////////////////////////////////////////////////
 
-router.route('https://yelp-x6hr.onrender.com/campground')
+router.route('/campground')
     .post(isLoggedIn, upload.array('image'), validateCampground, catchAsync(campgrounds.creat))
 
 
