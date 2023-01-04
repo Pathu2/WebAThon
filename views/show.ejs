@@ -35,11 +35,12 @@
                         </ul>
                         <% if (currentUser && campgrounds.author.equals(currentUser._id)) { %>
                             <div class="d-flex">
-                                <button type="button" class="btn p-2 flex-fill btn-primary"> <a
-                                        href="/campground/<%=campgrounds._id%>/edit"
-                                        style="text-decoration:none; color:WHITE;">click
-                                        kro</a></button>
-                                <button type="submit" form="NISH" class="btn p-2 flex-fill btn-danger">DELETE</button>
+                            <a type="button" class="btn btn-primary p-2 flex-fill"
+                                    href="/campground/<%=campgrounds._id%>/edit">Edit</a>
+                                            <form class ="flex-fill d-flex" method="post" action="/campground/<%=campgrounds._id%>?_method=DELETE">
+        <button class="btn flex-fill btn-danger" type="submit">DELETE</button>
+    </form>
+
 
                             </div>
                             <% } %>
@@ -109,6 +110,4 @@
     </form>
 
 
-    <form hidden ID="NISH" method="post" action="/campground/<%=campgrounds._id%>?_method=DELETE">
-        <button type="submit">DELETE</button>
-    </form>
+
