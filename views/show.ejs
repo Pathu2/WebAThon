@@ -112,35 +112,33 @@
 <br>
 <br>
 
+<form class="row g-3" method="POST" action="/campground/<%=campgrounds._id%>">
+    <div class="col-auto">
+      <label for="staticEmail2">Email</label>
+      <input type="text" id="staticEmail2" value="nish@" name="request[email]">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-3">Send Request</button>
+    </div>
+    </form>
+
+    
 <% if (currentUser && campgrounds.author.equals(currentUser._id)) { %>
-    <form class="row g-3" method="POST" action="/campground/<%=campgrounds._id%>">
-        <div class="col-auto">
-          <label for="staticEmail2">Username</label>
-          <input type="text" placeholder="<%=currentUser.username%>" readonly id="staticEmail2" value="<%=currentUser.username%>" name="request[email]">
-        </div>
-        <div class="col-auto">
-          <button type="submit" class="btn btn-primary mb-3">Send Request</button>
-        </div>
-        </form>
-        
-    <% } %>
-
-    <% if (currentUser && campgrounds.author.equals(currentUser._id)) { %>
-        <% for (let sample of campgrounds.requests) { %>
-            <form class="row g-3">
-                <div class="col-auto">
-                  <label for="staticEmail2" class="visually-hidden">Email</label>
-                  <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="<%=sample.email%>">
-                </div>
-                <div class="col-auto">
-                  <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
-                </div>
-              </form>
-            <% } %>
+    <% for (let sample of campgrounds.requests) { %>
+        <form class="row g-3">
+            <div class="col-auto">
+              <label for="staticEmail2" class="visually-hidden">Email</label>
+              <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="<%=sample.email%>">
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
+            </div>
+          </form>
         <% } %>
-        
-        
-
+    <% } %>
+    
+    
+    
 
 
 
