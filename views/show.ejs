@@ -2,11 +2,7 @@
     <link rel="stylesheet" href="/styleSheets/stars.css">
     <link rel="stylesheet" href="/success.css">
 
-    <h1>
-        <%if (currentUser) {%>
-            <%=currentUser.username%>
-                <% } %>
-    </h1>
+
 
     <div class="row" style="margin-top: 15px; margin-bottom:15px;">
         <div class="col-7">
@@ -77,6 +73,8 @@
 
     </div>
 
+
+ 
     <form method="post" action="/campground/<%=campgrounds._id%>/reviews">
         <div class="row">
             <div class="col-6 d-flex flex-column justify-content-between">
@@ -110,28 +108,47 @@
         </div>
 
     </form>
+
 <br>
 <br>
 <br>
 
+<% if (currentUser) { %>
+    <% if (campgrounds.author.equals(currentUser._id)) { %>
+
+        <% } else {  %>
 <form class="row g-3" method="POST" action="/campground/<%=campgrounds._id%>">
     <div class="col-auto">
       <label for="staticEmail2">Email</label>
       <input type="text" id="staticEmail2" value="nish@" name="request[email]">
     </div>
     <div class="col-auto">
-      <button type="submit" class="btn btn-primary mb-3">Send Request</button>
+      <button type="submit" class="btn btn-primary mb-3" onclick="send()">Send Request</button>
     </div>
     </form>
-    
+    <% } %>
+    <% } %>
+ 
 
+
+    
+    <% if (currentUser && campgrounds.author.equals(currentUser._id)) { %>
     <%if (campgrounds.approves.length >= 3) { %>
         <div class="alert alert-danger" role="alert">
             You cant select more than 4 people
           </div>
         <% } %>
+        <% } %>
+
+        <br>
+        <br>
+        <br>
 
     
+        <h1 class="h1">User Requests</h1>
+        <br>
+
+   
 <% if (currentUser && campgrounds.author.equals(currentUser._id)) { %>
     <% for (let sample of campgrounds.requests) { %>
         <form class="row g-3" method="post" action="/campground/<%=campgrounds._id%>">
@@ -147,6 +164,17 @@
           </form>
         <% } %>
     <% } %>
+
+    <script>
+        function sucess (){
+            alert("successfully addes to your event")
+
+        }
+
+        function send(){
+            alert("request send succesfully")
+        }
+    </script>
 
 
 

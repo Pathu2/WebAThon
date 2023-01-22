@@ -2,6 +2,7 @@
     <h1>List of active contests</h1>
 
     <% for (let campground of campgrounds) { %>
+        <% if (campground.approves.length <= 3) { %>
         <div class="card mb-3" style="max-width: auto;">
             <div class="row g-0">
                 <div class="col-md-4">
@@ -30,4 +31,5 @@
                 </div>
             </div>
         </div>
+        <% } %>
         <% } %>
