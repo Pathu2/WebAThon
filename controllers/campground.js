@@ -4,6 +4,7 @@ const Request = require('../models/request.js')
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
+const Approve = require('../models/approve.js')
 
 const dbUrl = process.env.DB_URL
 
@@ -72,6 +73,7 @@ module.exports.a4 = async function (req, res) {
     .populate({ path: 'reviews', populate: { path: 'author' } })
     .populate('author')
     .populate('requests')
+    .populate('approves')
   if (!campgrounds) {
     req.flash('error', 'cannot find that campground')
     return res.redirect('/campground')
@@ -82,10 +84,31 @@ module.exports.a4 = async function (req, res) {
 
 module.exports.a5 = async function (req, res) {
   const { id } = req.params
-  const campground = await Campground.findById(id)
-  const request = new Request(req.body.request)
-  await request.save()
-  campground.requests.push(request)
-  await campground.save()
+  if (req.body.request) {
+    const campground = await Campground.findById(id)
+    const request = new Request(req.body.request)
+    console.log(req.body.request)
+    await request.save()
+    campground.requests.push(request)
+    await campground.save()
+    ////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////
+  } else if (req.body.approve) {
+    const campground = await Campground.findById(id)
+    console.log(campground.approves.length)
+    if (campground.approves.length <= 3) {
+      const approve = new Approve(req.body.approve)
+      console.log(approve)
+      await approve.save()
+      campground.approves.push(approve)
+      await campground.save()
+    } else {
+      console.log('more people not allowed')
+      return res.redirect(`/campground/${id}`)
+    }
+
+    //pass
+  }
   ///////////////////////////////////////////////////////////////
 }

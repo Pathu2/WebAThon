@@ -1,0 +1,9 @@
+#b1:active {
+  background-color: pink;
+}
+#b1:focus {
+  color: red;
+}
+#b1.target {
+  color: red;
+}

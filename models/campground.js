@@ -26,6 +26,12 @@ const CampgroundSchema = new Schema({
       ref: 'Request',
     },
   ],
+  approves: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Approve',
+    },
+  ],
   reviews: [
     {
       type: Schema.Types.ObjectId,

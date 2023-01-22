@@ -1,5 +1,7 @@
 <% layout ('layouts/boilerplate.ejs') %>
     <link rel="stylesheet" href="/styleSheets/stars.css">
+    <link rel="stylesheet" href="/success.css">
+
     <h1>
         <%if (currentUser) {%>
             <%=currentUser.username%>
@@ -121,24 +123,37 @@
       <button type="submit" class="btn btn-primary mb-3">Send Request</button>
     </div>
     </form>
+    
+
+    <%if (campgrounds.approves.length >= 3) { %>
+        <div class="alert alert-danger" role="alert">
+            You cant select more than 4 people
+          </div>
+        <% } %>
 
     
 <% if (currentUser && campgrounds.author.equals(currentUser._id)) { %>
     <% for (let sample of campgrounds.requests) { %>
-        <form class="row g-3">
+        <form class="row g-3" method="post" action="/campground/<%=campgrounds._id%>">
             <div class="col-auto">
               <label for="staticEmail2" class="visually-hidden">Email</label>
-              <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="<%=sample.email%>">
+              <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="<%=sample.email%>" name="approve[email]">
             </div>
             <div class="col-auto">
-              <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
+
+              <button  type="submit" class="btn btn-primary mb-3" onclick="sucess()">Confirm identity</button>
+
             </div>
           </form>
         <% } %>
     <% } %>
-    
-    
-    
 
+
+
+
+
+    
+    
+    
 
 
