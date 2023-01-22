@@ -144,9 +144,11 @@
         <br>
         <br>
 
-    
+    <% if (currentUser && campgrounds.author.equals(currentUser._id)) { %>
         <h1 class="h1">User Requests</h1>
+        <% } %>
         <br>
+        
 
    
 <% if (currentUser && campgrounds.author.equals(currentUser._id)) { %>
