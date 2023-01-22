@@ -103,6 +103,7 @@ module.exports.a5 = async function (req, res) {
       await approve.save()
       campground.approves.push(approve)
       await campground.save()
+      res.redirect(`/campground/${id}`)
     } else {
       console.log('more people not allowed')
       return res.redirect(`/campground/${id}`)
