@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Review = require('./review.js')
-const requests = require('./request.js')
+const request = require('./request.js')
 const ImageSchema = new Schema({
   url: String,
   filename: String,

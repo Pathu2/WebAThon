@@ -76,7 +76,6 @@ module.exports.a4 = async function (req, res) {
     req.flash('error', 'cannot find that campground')
     return res.redirect('/campground')
   }
-
   console.log(campgrounds.requests[0].email)
   res.render('show', { campgrounds })
 }

@@ -95,7 +95,18 @@ app.get('/campground', async (req, res) => {
 })
 
 ///////////////////////////////////////////////////////////////////////////////////
+app.get('/campground/:id/request',async function (req, res) {
+    const {id} = req.params;
+    res.send(id)
+})
 
+
+app.post('/campground/:id/request',async function (req, res) {
+    const {id} = req.params;
+    console.log(id)
+})
+
+//////////////
 
 app.use(userRoutes);
 app.use(campgroundRoutes);
@@ -118,7 +129,6 @@ app.get('/fakeUser', async (req, res) => {
     res.send(newUser);
 
 })
-
 
 app.all('*', (req, res, next) => {
     next(new Error("Page not found", 404));
