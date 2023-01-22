@@ -44,6 +44,10 @@ router
 
 //////////////////////////////////////////////////////////////////////
 
+router.get('/', function(req, res){
+  res.render('home');
+})
+
 router.get('/campground/new', isLoggedIn, (req, res) => {
   res.render('new')
 })
