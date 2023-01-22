@@ -1,43 +1,47 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const Review = require('./review.js');
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const Review = require('./review.js')
+const requests = require('./request.js')
 const ImageSchema = new Schema({
-    url: String,
-    filename: String
+  url: String,
+  filename: String,
 })
 
 ImageSchema.virtual('thumbnail').get(function () {
-    return this.url.replace('/upload', '/upload/w_200')
+  return this.url.replace('/upload', '/upload/w_200')
 })
 const CampgroundSchema = new Schema({
-    title: String,
-    price: Number,
-    image: [ImageSchema],
-    description: String,
-    location: String,
-    author: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+  title: String,
+  price: Number,
+  image: [ImageSchema],
+  description: String,
+  location: String,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  requests: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Request',
     },
-    reviews: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Review'
-        }
-    ]
-});
-
-CampgroundSchema.post('findOneAndDelete', async function (doc) {
-    if (doc) {
-        await Review.deleteMany({
-            _id: {
-                $in: doc.reviews
-            }
-        })
-    }
+  ],
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Review',
+    },
+  ],
 })
 
+CampgroundSchema.post('findOneAndDelete', async function (doc) {
+  if (doc) {
+    await Review.deleteMany({
+      _id: {
+        $in: doc.reviews,
+      },
+    })
+  }
+})
 
-
-module.exports = mongoose.model('Campground', CampgroundSchema);
-
+module.exports = mongoose.model('Campground', CampgroundSchema)
